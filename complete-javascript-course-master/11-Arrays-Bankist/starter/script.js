@@ -212,7 +212,7 @@ Test data:
 Hints: Use tools from all lectures in this section so far 😉
 
 GOOD LUCK 😀
-*/
+
 
 const juliaData1 = [3, 5, 2, 12, 7];
 const kateData1 = [4, 1, 15, 8, 3];
@@ -238,3 +238,27 @@ const checkDogs = function (dogsAgeJulia, dogsAgeKate) {
 checkDogs(juliaData1, kateData1);
 console.log('----------DATA 2------------');
 checkDogs(juliaData2, kateData2);
+*/
+
+const eurToUsd = 1.1;
+
+// array.map does not mutate the original array!!
+// const movementsUsd = movements.map(function (mov) {
+//   return mov * eurToUsd;
+// });
+
+const movementsUsd = movements.map(mov => mov * eurToUsd);
+console.log(movements);
+console.log(movementsUsd);
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+const movementsDescriptions = movements.map((mov, i) => {
+  return `Movement ${i + 1}: You ${
+    mov > 0 ? 'depostied' : 'withdrew'
+  } ${Math.abs(mov)}`;
+});
+
+console.log(movementsDescriptions);
