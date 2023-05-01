@@ -73,7 +73,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">${mov}€</div>
     </div>
     `;
 
@@ -87,6 +87,29 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `${balance}€`;
 };
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const income = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => (acc += mov), 0);
+  labelSumIn.textContent = `${income}€`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => (acc += mov), 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(depopsit => (depopsit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, int) => (acc += int), 0);
+  labelSumInterest.textContent = `${interest}€`;
+};
+calcDisplaySummary(account1.movements);
 
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
@@ -366,6 +389,51 @@ const calcAverageHumanAge = function (dogAges) {
 
   return averageHumanAgeOfAdultDogs;
 };
+
+const average1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const average2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+console.log(average1, average2);
+*/
+
+/*
+//---------CHAINING-----------
+const eurToUsd = 1.1;
+
+// PIPELINE
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map((mov, i, arr) => {
+    // console.log(arr);
+    return mov * eurToUsd;
+  })
+  // .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => (acc += mov), 0);
+
+console.log(totalDepositsUSD);
+*/
+
+/*
+Coding Challenge #3
+
+Rewrite the 'calcAverageHumanAge' function from Challenge #2, but this time as an arrow function, and using chaining!
+
+Test data:
+§ Data 1: [5, 2, 4, 1, 15, 8, 3]
+§ Data 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+/*
+const calcAverageHumanAge = dogAges =>
+  dogAges
+    .map(dogAge => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
+    .filter(humanAge => humanAge >= 18)
+    .reduce(
+      (acc, youngAdultAge, i, arr) => (acc += youngAdultAge / arr.length),
+      0
+    );
 
 const average1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const average2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
