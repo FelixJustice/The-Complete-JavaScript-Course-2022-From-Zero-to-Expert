@@ -82,6 +82,18 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+console.log(accounts);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -240,6 +252,9 @@ console.log('----------DATA 2------------');
 checkDogs(juliaData2, kateData2);
 */
 
+/*
+//----------array.map METHOD----------
+
 const eurToUsd = 1.1;
 
 // array.map does not mutate the original array!!
@@ -262,3 +277,4 @@ const movementsDescriptions = movements.map((mov, i) => {
 });
 
 console.log(movementsDescriptions);
+*/
