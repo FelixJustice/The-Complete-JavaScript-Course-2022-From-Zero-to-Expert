@@ -440,3 +440,13 @@ const average2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 console.log(average1, average2);
 */
+
+/*
+// Array find method = Returns first element that fulfill the requirment
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+*/
