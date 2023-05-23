@@ -812,6 +812,9 @@ dogs.forEach(function (dog) {
 console.log('This is for task 1');
 console.log(dogs);
 
+//-- Teachers solution
+// dogs.forEach((dog) => (dog.recommendedFood = Math.trunc(dog.weight ** 0.75 * 28)));
+
 /*
 2. Find Sarah's dog and log to the console whether it's eating too much or too
 little. Hint: Some dogs have multiple owners, so you first need to find Sarah in
@@ -890,6 +893,8 @@ console.log(
 /*
 7. Create an array containing the dogs that are eating an okay amount of food (try to reuse the condition used in 6.)
 */
+
+// OBS THIS DID NOT FUNCITON!
 const dogsEatsWithinRange = dogs.filter(
   dog =>
     !dogEatsTooLittle(convertToKg(dog.curFood), dog.recommendedFood) &&
@@ -897,7 +902,15 @@ const dogsEatsWithinRange = dogs.filter(
 );
 
 console.log(dogsEatsWithinRange);
+// --------------------------
 
+console.log(
+  dogs.filter(
+    dog =>
+      convertToKg(dog.curFood) > dog.recommendedFood * 0.9 &&
+      convertToKg(dog.curFood) < dog.recommendedFood * 1.1
+  )
+);
 /*
 8. Create a shallow copy of the 'dogs' array and sort it by recommended food
 portion in an ascending order (keep in mind that the portions are inside the
@@ -911,3 +924,9 @@ shallowDogs.sort((a, b) => {
 });
 console.log(shallowDogs);
 // console.log(dogs);
+
+// Teachers solution
+const dogsSorted = dogs
+  .slice()
+  .sort((a, b) => a.recommendedFood - b.recommendedFood);
+console.log(dogsSorted);
