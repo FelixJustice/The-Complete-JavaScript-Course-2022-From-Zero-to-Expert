@@ -374,7 +374,7 @@ console.log(PI);
 
 console.log(Number('230_000'));
 console.log(parseInt('230_000'));
-*/
+
 
 console.log(2 ** 53 - 1);
 console.log(Number.MAX_SAFE_INTEGER);
@@ -407,3 +407,52 @@ console.log(huge + ' is REALLY BIG!!');
 // Divisions
 console.log(11n / 3n);
 console.log(10 / 3);
+*/
+
+// Create a date
+/*
+const now = new Date();
+console.log(now);
+
+console.log(new Date('May 28 2023 12:31:28'));
+console.log(new Date('December 24, 2015'));
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+console.log(new Date(2037, 10, 31));
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+*/
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log('date.getFullYear() method gets the year');
+console.log(future.getFullYear());
+console.log('date.getMonth() method gets the month and its zero based');
+console.log(future.getMonth());
+console.log('date.getDate() method gets the day NOT DATE');
+console.log(future.getDate());
+console.log('date.getDay() method gets the day of the week');
+console.log(future.getDay());
+console.log('Here comes just the basic getHours, getMinutes, getSeconds');
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+
+console.log('Creates a nice string out of the date given');
+console.log(future.toISOString());
+
+console.log('How much time has passed since that date date.getTime()');
+console.log(future.getTime());
+
+console.log(new Date(2142249780000));
+
+console.log(Date.now());
+
+console.log(
+  'setFullYear() sets the year (there are also set for all the other)'
+);
+future.setFullYear(2040);
+console.log(future);
