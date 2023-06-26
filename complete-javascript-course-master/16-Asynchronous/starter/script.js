@@ -217,9 +217,9 @@ const getCountryData = function (country) {
     });
 };
 
-btn.addEventListener('click', function () {
-  getCountryData('portugal');
-});
+// btn.addEventListener('click', function () {
+//   getCountryData('portugal');
+// });
 
 // getCountryData('australia');
 
@@ -238,6 +238,8 @@ console.log('Test end');
 
 */
 
+/*
+// Building promise
 const lotteryPromise = new Promise(function (resolve, reject) {
   console.log('lottery draw is happening 🔮');
   setTimeout(function () {
@@ -288,3 +290,60 @@ wait(1)
 
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject(new Error('Problem!')).catch(x => console.error(x));
+*/
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// getPosition().then(pos => console.log(pos));
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+
+      return fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+      );
+    })
+    .then(function (response) {
+      if (!response.ok)
+        throw new Error(`Problem with nominatim ${response.status}`);
+      return response.json();
+    })
+    .then(function (data) {
+      // console.log(data);
+      console.log(`You are in ${data.address.city}, ${data.address.country}`);
+      renderCountryAss(data);
+    })
+    .catch(err => {
+      console.log(err);
+      renderError(`Something went wrong 🎃🎃 ${err.message}. Try again!`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+const renderCountryAss = function (data, className) {
+  //   console.log(data);
+
+  const html = `
+    <article class="country">
+      <div class="country__data">
+        <h3 class="country__name">${data.address.country}</h3>
+        <h4 class="country__region">${data.address.city}</h4>
+      </div>
+    </article>`;
+
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+  //   console.log(html);
+};
+
+btn.addEventListener('click', whereAmI);
