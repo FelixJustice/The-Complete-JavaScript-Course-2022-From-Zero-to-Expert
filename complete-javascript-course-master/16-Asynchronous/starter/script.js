@@ -221,4 +221,70 @@ btn.addEventListener('click', function () {
   getCountryData('portugal');
 });
 
-getCountryData('australia');
+// getCountryData('australia');
+
+// The event loop in practice
+/*
+console.log('Test start');
+setTimeout(() => console.log('0 sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+Promise.resolve('Resolved promise 2').then(res => {
+  for (let i = 0; i < 1000000000; i++) {}
+  console.log(res);
+});
+
+console.log('Test end');
+
+*/
+
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('lottery draw is happening 🔮');
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve('You WIN 🎈');
+    } else {
+      reject(new Error('You lost your money 🎃'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
+
+// Promisifying setTimeout
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+wait(1)
+  .then(() => {
+    console.log('1 second has passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('2 second has passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('3 second has passed');
+    return wait(1);
+  })
+  .then(() => console.log('4 seconds passed'));
+
+// setTimeout(() => {
+//   console.log('1 second passes');
+//   setTimeout(() => {
+//     console.log('2 second passes');
+//     setTimeout(() => {
+//       console.log('3 second passes');
+//       setTimeout(() => {
+//         console.log('4 second passes');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+Promise.resolve('abc').then(x => console.log(x));
+Promise.reject(new Error('Problem!')).catch(x => console.error(x));
