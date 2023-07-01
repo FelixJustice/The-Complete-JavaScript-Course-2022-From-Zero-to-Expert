@@ -14,6 +14,7 @@ export const addToCart = function (product, quantity) {
   console.log(`${quantity} ${product} added to cart.`);
 };
 
+const test = 1;
 const totalPrice = 237;
 const totalQuantity = 23;
 

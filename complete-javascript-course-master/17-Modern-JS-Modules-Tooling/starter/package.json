@@ -10,10 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "core-js": "^3.31.0",
     "leaflet": "^1.9.4",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "regenerator-runtime": "^0.13.11"
   },
   "devDependencies": {
-    "parcel": "^2.9.3"
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
   }
 }
